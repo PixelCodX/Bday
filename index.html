@@ -1,56 +1,203 @@
-<body>
+<!-- WAITING / COUNTDOWN PAGE -->
+<div id="gamePage">
 
-<div id="countdown">
-    <h1>🎂 Tripti's Surprise Loading...</h1>
-    <h2 id="timer"></h2>
-</div>
+    <div class="top">
+        <div class="badge">🎁 SECRET SURPRISE</div>
+        <h1>Hey Tripti! 💗</h1>
+        <p>Your surprise unlocks at midnight ✨</p>
 
-<div id="birthday" style="display:none;">
-    <div class="card">
-        <div class="inner">
-            <div class="front">
-                <h2>🎉 Happy Birthday Tripti 🎂<br><br>Click Me ❤️</h2>
-            </div>
+        <div id="countdown">
+            00:00:00
+        </div>
 
-            <div class="back">
-                <h3>
-                    Dear Tripti,<br><br>
-                    Wishing you endless happiness, success and smiles.
-                    Thank you for being such a special friend. 🌸✨
-                </h3>
-            </div>
+        <div class="game-box">
+            <h2>❤️ Catch the Hearts!</h2>
+            <p>Tap the falling hearts and collect as many as you can.</p>
+
+            <div id="score">❤️ 0</div>
+
+            <div id="gameArea"></div>
         </div>
     </div>
+
 </div>
+
+<style>
+#gamePage{
+    position:fixed;
+    inset:0;
+    overflow:hidden;
+    background:linear-gradient(135deg,#ff7eb3,#ffb6d9,#ffd6e8);
+    font-family:Arial,sans-serif;
+    text-align:center;
+    color:white;
+}
+
+.top{
+    padding:25px 15px;
+}
+
+.badge{
+    display:inline-block;
+    background:rgba(255,255,255,.25);
+    padding:8px 16px;
+    border-radius:30px;
+    font-size:13px;
+}
+
+#gamePage h1{
+    font-size:38px;
+    margin:18px 0 5px;
+}
+
+#gamePage p{
+    font-size:16px;
+}
+
+#countdown{
+    margin:20px auto;
+    padding:15px;
+    width:270px;
+    border-radius:20px;
+    background:rgba(255,255,255,.22);
+    backdrop-filter:blur(8px);
+    font-size:30px;
+    font-weight:bold;
+}
+
+.game-box{
+    position:relative;
+    margin:15px auto;
+    width:90%;
+    max-width:500px;
+    height:430px;
+    background:rgba(255,255,255,.16);
+    border:1px solid rgba(255,255,255,.35);
+    border-radius:25px;
+    overflow:hidden;
+}
+
+.game-box h2{
+    margin:15px 0 5px;
+}
+
+#score{
+    font-size:22px;
+    font-weight:bold;
+    margin:8px;
+}
+
+#gameArea{
+    position:absolute;
+    left:0;
+    right:0;
+    top:105px;
+    bottom:0;
+}
+
+.heart{
+    position:absolute;
+    font-size:32px;
+    cursor:pointer;
+    animation:fall linear forwards;
+    user-select:none;
+}
+
+@keyframes fall{
+    from{
+        transform:translateY(-50px) rotate(0deg);
+    }
+    to{
+        transform:translateY(350px) rotate(360deg);
+    }
+}
+</style>
 
 <script>
 
-const targetDate = new Date("October 4, 2026 00:00:00").getTime();
+const birthday =
+    new Date("October 4, 2026 00:00:00").getTime();
 
-const timer = setInterval(function() {
+let score = 0;
+
+/* COUNTDOWN */
+function updateTimer(){
 
     const now = new Date().getTime();
-    const distance = targetDate - now;
+    const difference = birthday - now;
 
-    if(distance <= 0){
+    if(difference <= 0){
 
-        document.getElementById("countdown").style.display="none";
-        document.getElementById("birthday").style.display="block";
+        document.getElementById("gamePage").style.display="none";
 
-        clearInterval(timer);
+        /* Your existing birthday page */
+        document.getElementById("birthdayPage").style.display="flex";
+
         return;
     }
 
-    let days = Math.floor(distance/(1000*60*60*24));
-    let hours = Math.floor((distance%(1000*60*60*24))/(1000*60*60));
-    let minutes = Math.floor((distance%(1000*60*60))/(1000*60));
-    let seconds = Math.floor((distance%(1000*60))/1000);
+    const hours =
+        Math.floor(difference / (1000*60*60));
 
-    document.getElementById("timer").innerHTML =
-        days+"d "+hours+"h "+minutes+"m "+seconds+"s";
+    const minutes =
+        Math.floor(
+            (difference % (1000*60*60)) /
+            (1000*60)
+        );
 
-},1000);
+    const seconds =
+        Math.floor(
+            (difference % (1000*60)) /
+            1000
+        );
 
-</script>
+    document.getElementById("countdown").innerHTML =
+        String(hours).padStart(2,"0") + ":" +
+        String(minutes).padStart(2,"0") + ":" +
+        String(seconds).padStart(2,"0");
+}
 
-  </body>
+setInterval(updateTimer,1000);
+updateTimer();
+
+
+/* HEART GAME */
+function createHeart(){
+
+    const gameArea =
+        document.getElementById("gameArea");
+
+    const heart =
+        document.createElement("div");
+
+    heart.className="heart";
+    heart.innerHTML=
+        ["❤️","💗","💕","💖","💓"]
+        [Math.floor(Math.random()*5)];
+
+    heart.style.left =
+        Math.random()*85 + "%";
+
+    heart.style.animationDuration =
+        (2.5 + Math.random()*2) + "s";
+
+    heart.onclick=function(){
+
+        score++;
+
+        document.getElementById("score").innerHTML =
+            "❤️ " + score;
+
+        heart.remove();
+    };
+
+    gameArea.appendChild(heart);
+
+    setTimeout(()=>{
+        heart.remove();
+    },5000);
+}
+
+setInterval(createHeart,700);
+
+    </script>
