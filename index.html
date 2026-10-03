@@ -438,21 +438,24 @@ container.addEventListener("touchend", function(e) {
 
 
 /* Tap = flip */
+
 cards.forEach(card => {
 
-    card.addEventListener("click", function(e) {
+    card.addEventListener("touchend", function(e) {
 
-        if (moved) {
-            moved = false;
-            return;
+        const touch = e.changedTouches[0];
+
+        const diffX = Math.abs(touch.clientX - startX);
+        const diffY = Math.abs(touch.clientY - startY);
+
+        // If finger barely moved, treat as a tap
+        if (diffX < 15 && diffY < 15) {
+            card.classList.toggle("flipped");
         }
-
-        card.classList.toggle("flipped");
 
     });
 
 });
-
 
 /* Extra protection against browser gestures */
 document.addEventListener("touchmove", function(e) {
