@@ -1,0 +1,56 @@
+<body>
+
+<div id="countdown">
+    <h1>🎂 Tripti's Surprise Loading...</h1>
+    <h2 id="timer"></h2>
+</div>
+
+<div id="birthday" style="display:none;">
+    <div class="card">
+        <div class="inner">
+            <div class="front">
+                <h2>🎉 Happy Birthday Tripti 🎂<br><br>Click Me ❤️</h2>
+            </div>
+
+            <div class="back">
+                <h3>
+                    Dear Tripti,<br><br>
+                    Wishing you endless happiness, success and smiles.
+                    Thank you for being such a special friend. 🌸✨
+                </h3>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+
+const targetDate = new Date("October 4, 2026 00:00:00").getTime();
+
+const timer = setInterval(function() {
+
+    const now = new Date().getTime();
+    const distance = targetDate - now;
+
+    if(distance <= 0){
+
+        document.getElementById("countdown").style.display="none";
+        document.getElementById("birthday").style.display="block";
+
+        clearInterval(timer);
+        return;
+    }
+
+    let days = Math.floor(distance/(1000*60*60*24));
+    let hours = Math.floor((distance%(1000*60*60*24))/(1000*60*60));
+    let minutes = Math.floor((distance%(1000*60*60))/(1000*60));
+    let seconds = Math.floor((distance%(1000*60))/1000);
+
+    document.getElementById("timer").innerHTML =
+        days+"d "+hours+"h "+minutes+"m "+seconds+"s";
+
+},1000);
+
+</script>
+
+  </body>
