@@ -1,396 +1,451 @@
-<!-- BIRTHDAY CARDS -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday Tripti 🎂</title>
+
+<style>
+* {
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+}
+
+html, body {
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    overscroll-behavior: none;
+    background: #111;
+    font-family: Arial, sans-serif;
+}
+
+#birthdayPage {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    touch-action: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background:
+        radial-gradient(circle at top, #ff8fab 0%, #ff5c8a 35%, #111 100%);
+}
+
+/* Main area */
+.birthday-content {
+    width: 100%;
+    max-width: 430px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.title {
+    color: white;
+    font-size: 28px;
+    font-weight: bold;
+    margin-bottom: 8px;
+    text-align: center;
+}
+
+.subtitle {
+    color: #fff;
+    opacity: 0.9;
+    font-size: 14px;
+    margin-bottom: 25px;
+}
+
+/* Card area */
+.card-container {
+    position: relative;
+    width: 300px;
+    height: 390px;
+
+    touch-action: none;
+    user-select: none;
+    -webkit-user-select: none;
+    -webkit-touch-callout: none;
+    overscroll-behavior: none;
+}
+
+/* Card */
+.card {
+    position: absolute;
+    inset: 0;
+
+    perspective: 1000px;
+    display: none;
+    cursor: pointer;
+}
+
+.card.active {
+    display: block;
+}
+
+/* Inner flipping part */
+.card-inner {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transition: transform 0.65s ease;
+    transform-style: preserve-3d;
+}
+
+.card.flipped .card-inner {
+    transform: rotateY(180deg);
+}
+
+/* Front + back */
+.card-front,
+.card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 25px;
+
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+    padding: 30px;
+
+    box-shadow: 0 15px 40px rgba(0,0,0,0.35);
+}
+
+/* Front */
+.card-front {
+    background: rgba(255,255,255,0.95);
+    color: #ff3f78;
+    font-size: 25px;
+    font-weight: bold;
+    flex-direction: column;
+}
+
+.card-front span {
+    font-size: 55px;
+    margin-bottom: 20px;
+}
+
+/* Back */
+.card-back {
+    background: linear-gradient(135deg, #fff, #ffe5ed);
+    color: #333;
+    transform: rotateY(180deg);
+    font-size: 19px;
+    line-height: 1.5;
+    font-weight: 500;
+}
+
+/* Card number */
+.card-number {
+    position: absolute;
+    bottom: 15px;
+    font-size: 12px;
+    opacity: 0.5;
+}
+
+/* Swipe hint */
+.hint {
+    color: white;
+    margin-top: 22px;
+    font-size: 13px;
+    opacity: 0.9;
+}
+
+.dots {
+    display: flex;
+    gap: 7px;
+    margin-top: 15px;
+}
+
+.dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.4);
+}
+
+.dot.active {
+    background: white;
+    transform: scale(1.3);
+}
+
+/* Small screens */
+@media (max-height: 650px) {
+    .card-container {
+        width: 270px;
+        height: 350px;
+    }
+
+    .title {
+        font-size: 24px;
+    }
+}
+</style>
+</head>
+
+<body>
+
 <div id="birthdayPage">
 
-    <div class="birthday-title">
-        🎂 Happy Birthday Tripti 🎂
-        <p>Tap the card • Swipe to continue →</p>
-    </div>
+    <div class="birthday-content">
 
-    <div class="card-container" id="cardContainer">
-
-        <!-- CARD 1 -->
-        <div class="flip-card">
-            <div class="flip-inner">
-                <div class="flip-front">
-                    <div class="emoji">🫠</div>
-                    <h2>One More Year...</h2>
-                    <p>Tap me 👀</p>
-                </div>
-
-                <div class="flip-back">
-                    <div class="emoji">🤫</div>
-                    <h2>One more year older.</h2>
-                    <p>
-                        Don't worry,<br>
-                        I won't tell anyone. 😂
-                    </p>
-                </div>
-            </div>
+        <div class="title">
+            🎂 Happy Birthday, Tripti!
         </div>
 
-
-        <!-- CARD 2 -->
-        <div class="flip-card">
-            <div class="flip-inner">
-                <div class="flip-front">
-                    <div class="emoji">🎂</div>
-                    <h2>Birthday Wish</h2>
-                    <p>Tap me ❤️</p>
-                </div>
-
-                <div class="flip-back">
-                    <div class="emoji">❤️</div>
-                    <h2>Happy Birthday, Tripti!</h2>
-                    <p>
-                        Enjoy your day,<br>
-                        eat something good,<br>
-                        and don't forget your this boring friend. 😂
-                    </p>
-                </div>
-            </div>
+        <div class="subtitle">
+            Tap the card • Swipe to continue
         </div>
 
+        <div class="card-container" id="cardContainer">
 
-        <!-- CARD 3 -->
-        <div class="flip-card">
-            <div class="flip-inner">
-                <div class="flip-front">
-                    <div class="emoji">⏰</div>
-                    <h2>Important Announcement</h2>
-                    <p>Tap me 😂</p>
-                </div>
+            <!-- CARD 1 -->
+            <div class="card active" data-index="0">
+                <div class="card-inner">
 
-                <div class="flip-back">
-                    <div class="emoji">😭</div>
-                    <h2>Birthday celebration over.</h2>
-                    <p>
-                        Now stop scrolling and sleep.<br><br>
-                        <b>Wake up at 6:00 AM!</b> ⏰<br>
-                        Get ready and lets go to temple together if you want. 🙏
-                    </p>
+                    <div class="card-front">
+                        <span>🤫</span>
+                        Card 1
+                        <div class="card-number">Tap me</div>
+                    </div>
+
+                    <div class="card-back">
+                        One more year older.<br>
+                        Don’t worry, I won’t tell anyone. 🤫
+                    </div>
+
                 </div>
             </div>
-        </div>
 
 
-        <!-- CARD 4 -->
-        <div class="flip-card">
-            <div class="flip-inner">
-                <div class="flip-front">
-                    <div class="emoji">📚</div>
-                    <h2>One Last Thing...</h2>
-                    <p>Tap me 👀</p>
+            <!-- CARD 2 -->
+            <div class="card" data-index="1">
+                <div class="card-inner">
+
+                    <div class="card-front">
+                        <span>🎂</span>
+                        Card 2
+                        <div class="card-number">Tap me</div>
+                    </div>
+
+                    <div class="card-back">
+                        Happy Birthday, Tripti! ❤️<br><br>
+                        Enjoy your day, eat something good,
+                        and don’t forget your boring friend. 😂
+                    </div>
+
                 </div>
+            </div>
 
-                <div class="flip-back">
-                    <div class="emoji">😭📚</div>
-                    <h2>And don't forget...</h2>
-                    <p>
+
+            <!-- CARD 3 -->
+            <div class="card" data-index="2">
+                <div class="card-inner">
+
+                    <div class="card-front">
+                        <span>⏰</span>
+                        Card 3
+                        <div class="card-number">Tap me</div>
+                    </div>
+
+                    <div class="card-back">
+                        Okay, birthday celebration over. 😂<br><br>
+
+                        Now stop scrolling and sleep.<br>
+
+                        Wake up at 6:00 AM! ⏰<br>
+
+                        Get ready and lets go to the temple together if you want. 🙏
+                    </div>
+
+                </div>
+            </div>
+
+
+            <!-- CARD 4 -->
+            <div class="card" data-index="3">
+                <div class="card-inner">
+
+                    <div class="card-front">
+                        <span>😭</span>
+                        Card 4
+                        <div class="card-number">Tap me</div>
+                    </div>
+
+                    <div class="card-back">
+                        And don’t forget…<br><br>
+
                         You have an<br>
-                        <b>EXAM TOMORROW.</b>
-                    </p>
+
+                        <strong>EXAM TOMORROW.</strong><br><br>
+
+                        😭📚
+                    </div>
+
                 </div>
             </div>
+
+
+            <!-- CARD 5 -->
+            <div class="card" data-index="4">
+                <div class="card-inner">
+
+                    <div class="card-front">
+                        <span>🥳</span>
+                        Final Card
+                        <div class="card-number">Tap me</div>
+                    </div>
+
+                    <div class="card-back">
+                        Anyway… ❤️<br><br>
+
+                        <strong>Happy Birthday!</strong><br><br>
+
+                        Have a great one. 🥳
+                    </div>
+
+                </div>
+            </div>
+
         </div>
 
+        <div class="hint" id="hint">
+            ← Swipe left for next card →
+        </div>
 
-        <!-- CARD 5 FINAL -->
-        <div class="flip-card">
-            <div class="flip-inner">
-                <div class="flip-front">
-                    <div class="emoji">🎉</div>
-                    <h2>Final Card</h2>
-                    <p>Tap me ❤️</p>
-                </div>
-
-                <div class="flip-back">
-                    <div class="emoji">🥳</div>
-                    <h1>Anyway...</h1>
-
-                    <p>
-                        Happy Birthday! 🎂
-                    </p>
-
-                    <h2>Have a great one. 🥳</h2>
-                </div>
-            </div>
+        <div class="dots" id="dots">
+            <div class="dot active"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
         </div>
 
     </div>
-
-    <div class="dots" id="dots"></div>
 
 </div>
 
 
-<style>
-
-#birthdayPage{
-    position:fixed;
-    inset:0;
-
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    justify-content:center;
-
-    overflow:hidden;
-
-    background:
-    linear-gradient(
-        135deg,
-        #ff7eb3,
-        #ffb6d9,
-        #ffd6e8
-    );
-
-    font-family:Arial,sans-serif;
-}
-
-
-/* TITLE */
-
-.birthday-title{
-    color:white;
-    text-align:center;
-    font-size:28px;
-    font-weight:bold;
-    margin-bottom:18px;
-}
-
-.birthday-title p{
-    font-size:14px;
-    font-weight:normal;
-    margin-top:8px;
-}
-
-
-/* CARD AREA */
-
-.card-container{
-    width:300px;
-    height:390px;
-    position:relative;
-}
-
-
-/* CARD */
-
-.flip-card{
-    position:absolute;
-
-    width:100%;
-    height:100%;
-
-    transition:
-        transform .45s ease,
-        opacity .45s ease;
-
-    cursor:pointer;
-}
-
-
-.flip-inner{
-    width:100%;
-    height:100%;
-
-    position:relative;
-
-    transform-style:preserve-3d;
-
-    transition:transform .7s;
-}
-
-
-.flip-card.flipped .flip-inner{
-    transform:rotateY(180deg);
-}
-
-
-/* FRONT + BACK */
-
-.flip-front,
-.flip-back{
-
-    position:absolute;
-    inset:0;
-
-    border-radius:28px;
-
-    display:flex;
-    flex-direction:column;
-
-    justify-content:center;
-    align-items:center;
-
-    padding:28px;
-
-    box-sizing:border-box;
-
-    text-align:center;
-
-    backface-visibility:hidden;
-
-    box-shadow:
-        0 15px 35px rgba(0,0,0,.20);
-}
-
-
-/* FRONT */
-
-.flip-front{
-    background:white;
-    color:#ff4f98;
-}
-
-.flip-front h2{
-    margin:15px 0 5px;
-}
-
-.flip-front p{
-    color:#777;
-}
-
-
-/* BACK */
-
-.flip-back{
-    background:white;
-    color:#333;
-
-    transform:rotateY(180deg);
-}
-
-.flip-back h1,
-.flip-back h2{
-    color:#ff4f98;
-}
-
-.flip-back p{
-    line-height:1.6;
-    font-size:17px;
-}
-
-
-/* EMOJI */
-
-.emoji{
-    font-size:55px;
-    margin-bottom:10px;
-}
-
-
-/* DOTS */
-
-.dots{
-    display:flex;
-    gap:9px;
-    margin-top:18px;
-}
-
-.dot{
-    width:9px;
-    height:9px;
-
-    background:rgba(255,255,255,.5);
-
-    border-radius:50%;
-
-    transition:.2s;
-}
-
-.dot.active{
-    background:white;
-    transform:scale(1.4);
-}
-
-
-/* MOBILE */
-
-@media(max-height:700px){
-
-    .birthday-title{
-        font-size:23px;
-        margin-bottom:8px;
-    }
-
-    .card-container{
-        height:350px;
-    }
-
-}
-
-</style>
-
-
 <script>
 
-const cards =
-    document.querySelectorAll(".flip-card");
-
-const dotsContainer =
-    document.getElementById("dots");
+const cards = document.querySelectorAll(".card");
+const dots = document.querySelectorAll(".dot");
+const container = document.getElementById("cardContainer");
+const hint = document.getElementById("hint");
 
 let current = 0;
 
+let startX = 0;
+let startY = 0;
+let moved = false;
 
-/* CREATE DOTS */
 
-cards.forEach((card,index)=>{
+/* Show selected card */
+function showCard(index) {
 
-    const dot =
-        document.createElement("div");
+    cards.forEach((card, i) => {
+        card.classList.toggle("active", i === index);
+        card.classList.remove("flipped");
+    });
 
-    dot.className="dot";
+    dots.forEach((dot, i) => {
+        dot.classList.toggle("active", i === index);
+    });
 
-    if(index === 0){
-        dot.classList.add("active");
+    if (index === cards.length - 1) {
+        hint.textContent = "🎉 You reached the end!";
+    } else {
+        hint.textContent = "← Swipe left for next card →";
     }
-
-    dotsContainer.appendChild(dot);
-
-});
-
-
-const dots =
-    document.querySelectorAll(".dot");
-
-
-/* SHOW CURRENT CARD */
-
-function showCard(index){
-
-    cards.forEach((card,i)=>{
-
-        card.style.transform =
-            `translateX(${(i-index)*110}%)`;
-
-        card.style.opacity =
-            i === index ? "1" : "0";
-
-        card.style.zIndex =
-            i === index ? "10" : "1";
-
-    });
-
-
-    dots.forEach((dot,i)=>{
-
-        dot.classList.toggle(
-            "active",
-            i === index
-        );
-
-    });
-
 }
 
 
-/* FLIP */
+/* Touch start */
+container.addEventListener("touchstart", function(e) {
 
-cards.forEach(card=>{
+    const touch = e.touches[0];
 
-    card.addEventListener("click",()=>{
+    startX = touch.clientX;
+    startY = touch.clientY;
+
+    moved = false;
+
+}, { passive: false });
+
+
+/* Prevent page movement */
+container.addEventListener("touchmove", function(e) {
+
+    e.preventDefault();
+
+    const touch = e.touches[0];
+
+    const diffX = touch.clientX - startX;
+    const diffY = touch.clientY - startY;
+
+    if (Math.abs(diffX) > 10 || Math.abs(diffY) > 10) {
+        moved = true;
+    }
+
+}, { passive: false });
+
+
+/* Swipe */
+container.addEventListener("touchend", function(e) {
+
+    e.preventDefault();
+
+    const touch = e.changedTouches[0];
+
+    const diffX = touch.clientX - startX;
+    const diffY = touch.clientY - startY;
+
+    /* Ignore vertical movement */
+    if (Math.abs(diffX) < Math.abs(diffY)) {
+        return;
+    }
+
+    /* Not enough movement */
+    if (Math.abs(diffX) < 50) {
+        return;
+    }
+
+    /* Swipe LEFT */
+    if (diffX < 0 && current < cards.length - 1) {
+        current++;
+        showCard(current);
+    }
+
+    /* Swipe RIGHT */
+    if (diffX > 0 && current > 0) {
+        current--;
+        showCard(current);
+    }
+
+}, { passive: false });
+
+
+/* Tap = flip */
+cards.forEach(card => {
+
+    card.addEventListener("click", function(e) {
+
+        if (moved) {
+            moved = false;
+            return;
+        }
 
         card.classList.toggle("flipped");
 
@@ -399,71 +454,19 @@ cards.forEach(card=>{
 });
 
 
-/* SWIPE */
+/* Extra protection against browser gestures */
+document.addEventListener("touchmove", function(e) {
 
-let startX = 0;
-
-const container =
-    document.getElementById("cardContainer");
-
-
-container.addEventListener(
-    "touchstart",
-    function(e){
-
-        startX =
-            e.touches[0].clientX;
-
+    if (e.target.closest("#birthdayPage")) {
+        e.preventDefault();
     }
-);
 
+}, { passive: false });
 
-container.addEventListener(
-    "touchend",
-    function(e){
-
-        const endX =
-            e.changedTouches[0].clientX;
-
-        const difference =
-            endX - startX;
-
-
-        if(Math.abs(difference) > 50){
-
-            /* SWIPE LEFT */
-
-            if(
-                difference < 0 &&
-                current < cards.length - 1
-            ){
-                current++;
-            }
-
-
-            /* SWIPE RIGHT */
-
-            if(
-                difference > 0 &&
-                current > 0
-            ){
-                current--;
-            }
-
-
-            cards[current]
-                .classList
-                .remove("flipped");
-
-            showCard(current);
-        }
-
-    }
-);
-
-
-/* FIRST CARD */
 
 showCard(0);
 
-    </script>
+</script>
+
+</body>
+                        </html>
